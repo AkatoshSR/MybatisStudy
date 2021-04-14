@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF8" ?>
+<!DOCTYPE configuration
+        PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration>
+
+    <properties resource="db.properties"/>
+
+    <typeAliases>
+        <typeAlias type="com.sqx.Pojo.User" alias="User"/>
+        <typeAlias type="com.sqx.Pojo.Student" alias="Student"/>
+        <typeAlias type="com.sqx.Pojo.Teacher" alias="Teacher"/>
+    </typeAliases>
+
+    <environments default="development">
+        <environment id="development">
+            <transactionManager type="JDBC"/>
+            <dataSource type="POOLED">
+                <property name="driver" value="${driver}"/>
+                <property name="url" value="${url}"/>
+                <property name="username" value="${username}"/>
+                <property name="password" value="${password}"/>
+            </dataSource>
+        </environment>
+    </environments>
+
+    <mappers>
+        <mapper resource="com/sqx/Dao/UserMapper.xml"/>
+        <mapper resource="com/sqx/Dao/StudentMapper.xml"/>
+    </mappers>
+</configuration>

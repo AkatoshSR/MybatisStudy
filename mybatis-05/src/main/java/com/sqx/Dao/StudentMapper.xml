@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.sqx.Dao.StudentMapper">
+
+    <select id="getStudent" resultType="Student" resultMap="StudentTeacher">
+        select * from mybatis.student
+    </select>
+
+    <resultMap id="StudentTeacher" type="Student" >
+        <result property="id" column="id"/>
+        <result property="name" column="name"/>
+        <association property="teacher" column="t_id" javaType="Teacher" select="getTeacher"/>
+    </resultMap>
+
+    <select id="getTeacher" resultType="Teacher">
+        select * from mybatis.teacher where id=#{id}
+    </select>
+
+</mapper>

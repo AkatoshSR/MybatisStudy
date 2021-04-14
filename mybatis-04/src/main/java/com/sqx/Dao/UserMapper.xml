@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!--中文-->
+<mapper namespace="com.sqx.Dao.UserMapper">
+
+    <!--结果集映射-->
+    <resultMap id="UserMap" type="User">
+        <!-- column数据库中的字段，property是实体类中的属性 -->
+        <!--<result column="id" property="id"/>-->
+        <!--<result column="name" property="name"/>-->
+        <result column="pwd" property="password"/>
+    </resultMap>
+
+    <select id="getUserList" resultType="com.sqx.Pojo.User">
+        select *
+        from mybatis.user
+    </select>
+
+    <select id="getUserById" resultMap="UserMap">
+        select *
+        from mybatis.user
+        where id = #{id}
+    </select>
+
+    <insert id="addUser" parameterType="com.sqx.Pojo.User">
+        insert into mybatis.user(id, name, pwd)
+        values (#{id}, #{name}, #{pwd})
+    </insert>
+
+    <update id="updateUser" parameterType="com.sqx.Pojo.User">
+        update mybatis.user
+        set name=#{name},
+            pwd=#{pwd}
+        where id = #{id}
+    </update>
+
+    <delete id="deleteUser" parameterType="int">
+        delete
+        from mybatis.user
+        where id = #{id}
+    </delete>
+
+    <select id="getUserByLimit" parameterType="map" resultType="user">
+        select * from mybatis.user limit #{startIndex},#{pageSize}
+    </select>
+</mapper>
